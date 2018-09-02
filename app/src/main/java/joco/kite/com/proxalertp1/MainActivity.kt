@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
         val MESSAGE_KEY = "MESSAGE:KEY"
     }
 
-    val RADIUS : Float = 1000f
+    val RADIUS : Float = 100f
     val EXPIRATION : Long = -1
     val INTENT_REQUEST_CODE : Int = 1
     val intentname : String = "joco.kite.com.proxalertp1.showMessage_activity"
@@ -50,11 +50,16 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
 
     @SuppressLint("MissingPermission")
     private fun setAlert(latitude: Double, longitude: Double, message: String) {
+        placesBox.put(Place(0,latitude,longitude,message))
         var myintent = Intent(intentname)
         myintent.putExtra(MESSAGE_KEY,message)
         var mypendingInent = PendingIntent.getBroadcast(applicationContext,INTENT_REQUEST_CODE,myintent,PendingIntent.FLAG_CANCEL_CURRENT)
         tesztGpsPermission()
         locationManager.addProximityAlert(latitude,longitude,RADIUS,EXPIRATION,mypendingInent)
+        var placeList = placesBox.all
+        for (placeitem in placeList) {
+            info { " Mentett hely: szélesség ${placeitem.latitude} hosszúság: ${placeitem.longitude} üzenet: ${placeitem.message} "}
+        }
 
 
     }
