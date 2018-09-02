@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
 
         var placeList = placesBox.all
         for (placeitem in placeList) {
-            info { " Mentett hely: szélesség ${placeitem.latitude} hosszúság: ${placeitem.longitude} üzenet: ${placeitem.message} "}
+            info { " Saved places: latitude ${placeitem.latitude} longitude: ${placeitem.longitude} message: ${placeitem.message} "}
         }
 
 
@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
     private fun tesztGpsPermission() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
-            info( "Nem volt jog a GPS használatához")
+            info( "No GPS access")
         } else {
-            info( "Már volt jog a GPS koordináták olvasáshoz")
+            info( "Access GPS already granted")
         }
 
     }
