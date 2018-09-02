@@ -9,6 +9,7 @@ import android.location.LocationManager
 import android.media.RingtoneManager
 import android.support.v4.app.NotificationCompat
 import joco.kite.com.proxalertp1.MainActivity.Companion.MESSAGE_KEY
+import joco.kite.com.proxalertp1.MainActivity.Companion.intentname
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.debug
 import org.jetbrains.anko.info
@@ -34,9 +35,9 @@ class ProximityAlertReceiver : BroadcastReceiver() , AnkoLogger{
         var notificationmanager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         info(message+" "+infostring)
         context.longToast("Show in toast : $message $infostring")
-
-        var notifintent = Intent(context,showMessage_activity::class.java).putExtra(MESSAGE_KEY,message+" "+ infostring)
-        var notifPendingintent = PendingIntent.getActivity(context,0,notifintent, PendingIntent.FLAG_CANCEL_CURRENT)
+        var notifintent = Intent(intentname).putExtra(MESSAGE_KEY,message+" "+ infostring)
+        //var notifintent = Intent(context,showMessage_activity::class.java).putExtra(MESSAGE_KEY,message+" "+ infostring)
+        var notifPendingintent = PendingIntent.getBroadcast(context,0,notifintent, PendingIntent.FLAG_CANCEL_CURRENT)
         val notibuilder=   NotificationCompat.Builder(context,"default")
                 .setContentText(message+ " " + infostring)
                 .setAutoCancel(true)

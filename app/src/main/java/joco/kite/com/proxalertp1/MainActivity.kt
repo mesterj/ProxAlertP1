@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
 
     companion object {
         val MESSAGE_KEY = "MESSAGE:KEY"
+        val intentname = "ACTION_PROXIMITY_ALERT"
     }
 
-    val RADIUS : Float = 5f
-    val EXPIRATION : Long = -1
+    val RADIUS : Float = 10f // 10 meters
+    val EXPIRATION : Long = 6000 // one hour
     val INTENT_REQUEST_CODE : Int = 1
-    val intentname : String = "ACTION_PROXIMITY_ALERT"
 
     lateinit var boxStore : MyObjectBox
     lateinit var placesBox : Box<Place>
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
         tesztGpsPermission()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        btnSave.onClick { setAlert(etLatValue.text.toString().toDouble(),etLatValue.text.toString().toDouble(),etMessage.text.toString()) }
+        btnSave.onClick { setAlert(etLatValue.text.toString().toDouble(),etLongValue.text.toString().toDouble(),etMessage.text.toString()) }
     }
 
     @SuppressLint("MissingPermission")
