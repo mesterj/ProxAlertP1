@@ -34,7 +34,7 @@ class ProximityAlertReceiver : BroadcastReceiver() , AnkoLogger{
         var message = intent.extras.getString(MESSAGE_KEY,"" )
         var notificationmanager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         info(message+" "+infostring)
-        context.longToast("Show in toast : $message $infostring")
+       // context.longToast("Show in toast : $message $infostring")
         var notifintent = Intent(intentname).putExtra(MESSAGE_KEY,message+" "+ infostring)
         var notifPendingintent = PendingIntent.getBroadcast(context,0,notifintent, PendingIntent.FLAG_CANCEL_CURRENT)
         val notibuilder=   NotificationCompat.Builder(context,"default")
