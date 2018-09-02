@@ -12,6 +12,7 @@ import joco.kite.com.proxalertp1.MainActivity.Companion.MESSAGE_KEY
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.debug
 import org.jetbrains.anko.info
+import org.jetbrains.anko.longToast
 
 class ProximityAlertReceiver : BroadcastReceiver() , AnkoLogger{
 
@@ -22,16 +23,18 @@ class ProximityAlertReceiver : BroadcastReceiver() , AnkoLogger{
 
                if (entering) {
                    debug {" $javaClass.simpleName entering" }
-                   infostring = "belépés a területre"
+                   infostring = "entering to area"
                }
         else {
             debug(" $javaClass.simpleName exiting");
-            infostring = "kilépés a területről"
+            infostring = "exiting from area"
         }
 
         var message = intent.extras.getString(MESSAGE_KEY,"" )
         var notificationmanager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         info(message+" "+infostring)
+        context.longToast("Show in toast : $message $infostring")
+
         var notifintent = Intent(context,showMessage_activity::class.java).putExtra(MESSAGE_KEY,message+" "+ infostring)
         var notifPendingintent = PendingIntent.getActivity(context,0,notifintent, PendingIntent.FLAG_CANCEL_CURRENT)
         val notibuilder=   NotificationCompat.Builder(context,"default")
