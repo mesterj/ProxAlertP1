@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
         val intentname = "ACTION_PROXIMITY_ALERT"
     }
 
-    val RADIUS : Float = 100f // 10 meters
+    val RADIUS : Float = 100f // 100 meters
+    val ESTIMATED_RADIUS : Float = 2000f //2 km
     val EXPIRATION : Long = 6000 // one hour
     val EXPIRATION_ONE_DAY : Long = 86400000 // one day
     val INTENT_REQUEST_CODE : Int = 1
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() , AnkoLogger{
         myintent.putExtra(MESSAGE_KEY,message)
         var mypendingInent = PendingIntent.getBroadcast(applicationContext,INTENT_REQUEST_CODE,myintent,PendingIntent.FLAG_CANCEL_CURRENT)
         tesztGpsPermission()
-        locationManager.addProximityAlert(latitude,longitude,RADIUS,EXPIRATION_ONE_DAY,mypendingInent)
+        locationManager.addProximityAlert(latitude,longitude,ESTIMATED_RADIUS,EXPIRATION_ONE_DAY*2,mypendingInent)
 
         val filter = IntentFilter(intentname)
 
